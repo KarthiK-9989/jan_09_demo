@@ -1,0 +1,40 @@
+{
+  "name" : "jan6",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::471112680641:role/glue-s3role",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-471112680641-eu-north-1/scripts/jan6.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-471112680641-eu-north-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-471112680641-eu-north-1/temporary/"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 2,
+  "timeout" : 480,
+  "maxCapacity" : 2.0,
+  "glueVersion" : "5.0",
+  "numberOfWorkers" : 2,
+  "workerType" : "G.1X",
+  "codeGenConfigurationNodes" : "{\"node-1736132076127\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://aug222222/info.csv\"},\"Escaper\":\"\",\"Exclusions\":[],\"Name\":\"Amazon S3\",\"OptimizePerformance\":false,\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"id\",\"Type\":\"string\"},{\"Name\":\"details\",\"Type\":\"string\"},{\"Name\":\"mean\",\"Type\":\"string\"}]}],\"Paths\":[\"s3://aug222222/info.csv\"],\"QuoteChar\":\"quote\",\"Recurse\":true,\"Separator\":\"comma\",\"WithHeader\":true}},\"node-1736132184217\":{\"S3DirectTarget\":{\"AutoDataQuality\":{\"EvaluationContext\":\"EvaluateDataQuality_node1736131945531\",\"IsEnabled\":true},\"Compression\":\"none\",\"Format\":\"csv\",\"Inputs\":[\"node-1736132111987\"],\"Name\":\"Amazon S3\",\"PartitionKeys\":[],\"Path\":\"s3://jan10bucket\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}},\"node-1736132111987\":{\"SparkSQL\":{\"Inputs\":[\"node-1736132076127\"],\"Name\":\"SQL Query\",\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"id\",\"Type\":\"string\"},{\"Name\":\"details\",\"Type\":\"string\"},{\"Name\":\"mean\",\"Type\":\"string\"}]}],\"SqlAliases\":[{\"Alias\":\"myDataSource\",\"From\":\"node-1736132076127\"}],\"SqlQuery\":\"select * from myDataSource where id='7'\"}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "jan_09_demo",
+    "branch" : "master",
+    "folder" : "jan6"
+  }
+}
